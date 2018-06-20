@@ -1,4 +1,4 @@
-%% Budget size %%
+%% Test for various value of Rho (anomaly threshold), for testing keyboard and swipe features together  %%
 rng('shuffle')
 
 my_epsilon = 1e-6;
@@ -6,7 +6,7 @@ my_epsilon = 1e-6;
 mos=[2,4];
 mo = 4;
     
-path = '/home/kolosnjaji/teaching/theses/BA_Continuous_Authentication/Matlab/Results/Budget/';
+path = './data/';
 
 if(mo==1)
 path = strcat(path,'Swipes/');
@@ -28,7 +28,7 @@ sz=59;
 sf = [37 4 17 36 1 55 21 18 16 28 26 42 46 38 20 43 6 51 35 3 22 33 19 40 23 44];
 end
 
-sf_keyboard = [29 32 35	28 34 31 30	33 36 13 19]; 
+sf_keyboard = [29 32 35	28 34 31 30 33 36 13 19]; 
 sf_swipe = [37 4 17 36 1 55 21 18 16 28 26 42 46 38 20 43 6 51 35 3 22 33 19 40 23 44];
 
 Bs = [25 50 75 100 125 150 175 200 250 300 350];
@@ -101,25 +101,6 @@ for rho_it_swipe = 1:size(rho_values,2)
                 for test_no = 1:num_tests
 
                     [predictors, response, predictorsTest, responseTest, ind]=getDataRK_AD(l,numU, sf_swipe, [], 300, 0, 2,valid_user,attack_user);
-%                     corr_loop=true;                
-%                     while corr_loop==true
-%                         my_corr = corrcoef(predictors);
-%                         num_dim_predictors = size(predictors,2);
-%                         for i=1:num_dim_predictors
-%                             my_corr(i,i)=0;
-%                         end
-%                         max_corr = max(my_corr);
-%                         if (any(max_corr>0.9))
-%                             [max_val, col_id] = max(max_corr);
-%                             num_dim_predictors = size(predictors,2);
-%                             columns_to_select = linspace(1,num_dim_predictors, num_dim_predictors);
-%                             columns_to_select = columns_to_select(columns_to_select~=col_id);
-%                             predictors = predictors(:, columns_to_select);
-%                             predictorsTest = predictorsTest(:, columns_to_select);
-%                         else
-%                             break
-%                         end
-%                     end
 
                     szVa = sum(response==1); 
                     szAt = sum(response==-1); 
@@ -144,28 +125,6 @@ for rho_it_swipe = 1:size(rho_values,2)
                     % KEYBOARD %
                     %%%%%%%%%%%%
                     [predictorsK, responseK, predictorsTestK, responseTestK, indK]=getDataK_AD(l,numU, sf_keyboard, [], 300, [], 2,valid_user,attack_user);
-
-
-%                     corr_loop=true;                
-% 
-%                     while corr_loop==true
-%                         my_corr = corrcoef(predictorsK);
-%                         num_dim_predictors = size(predictorsK,2);
-%                         for i=1:num_dim_predictors
-%                             my_corr(i,i)=0;
-%                         end
-%                         max_corr = max(my_corr);
-%                         if (any(max_corr>0.9))
-%                             [max_val, col_id] = max(max_corr);
-%                             num_dim_predictors = size(predictorsK,2);
-%                             columns_to_select = linspace(1,num_dim_predictors, num_dim_predictors);
-%                             columns_to_select = columns_to_select(columns_to_select~=col_id);
-%                             predictorsK = predictorsK(:, columns_to_select);
-%                             predictorsTestK = predictorsTestK(:, columns_to_select);
-%                         else
-%                             break
-%                         end
-%                     end
 
                     szVaK = sum(responseK==1); 
                     szAtK = sum(responseK==-1);

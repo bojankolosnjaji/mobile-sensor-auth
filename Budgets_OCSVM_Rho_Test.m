@@ -1,3 +1,4 @@
+% Test for online OC-SVM, for various values of anomaly threhold (rho) %
 %% Budget size %%
 rng('shuffle')
 

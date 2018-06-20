@@ -1,10 +1,11 @@
-%% Budget size %%
+%% Test for the online anomaly detection model with various budget size %%
 rng('shuffle')
 
 mos=[2,4];
 mo = 4;
-    
-path = '/home/kolosnjaji/teaching/theses/BA_Continuous_Authentication/Matlab/Results/Budget/';
+
+% path to the sensor data
+path = '/data/'; 
 
 if(mo==1)
 path = strcat(path,'Swipes/');
@@ -83,8 +84,6 @@ for budget_it = 1:size(budgets,2)
     tr_users = zeros(28,1);
     acc_users = zeros(28,1);
     confusion_matrix = zeros(28,28);
-
-   
     for valid_user=1:28
         correct_test = 0;
         all_test = 0;
